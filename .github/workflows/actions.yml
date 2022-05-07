@@ -1,0 +1,40 @@
+name: sqlfluff with reviewdog
+
+on: [pull_request]
+
+env: 
+  TARGET_BRANCH: ${{ github.base_ref }}
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install Packages
+        run: |
+          pip install sqlfluff
+          pip install sqlfluff-templater-dbt
+          pip install dbt-bigquery
+      - name: 'Run sqlfluff lint and reviewdog'
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+        run: |
+          git fetch --depth 1 origin ${TARGET_BRANCH}
+          for file in $(git diff origin/${TARGET_BRANCH} HEAD --diff-filter=AM --name-only -- "*.sql") ; do
+            sqlfluff lint --dialect bigquery --format json ${file} |
+            jq -R 'fromjson?' | jq -r -f "${{ github.workspace }}/.github/to-rdjson.jq" |
+            reviewdog -f=rdjson -reporter=github-pr-review -filter-mode=nofilter -level=error -fail-on-error
+          done

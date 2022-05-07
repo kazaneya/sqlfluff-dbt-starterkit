@@ -1,0 +1,7 @@
+github-actions:
+  target: sqlfluff
+  outputs:
+    sqlfluff:
+      type: bigquery
+      schema: dummy
+      method: oauth
