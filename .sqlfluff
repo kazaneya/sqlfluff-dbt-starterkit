@@ -1,0 +1,62 @@
+# dbt Style Guide
+# https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
+
+# SQL Style Guide
+# https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/
+
+[sqlfluff]
+templater = dbt
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = .dbt
+profile = github-actions
+target = sqlfluff
+
+[sqlfluff:rules]
+# dbt Style Guide
+tab_space_size = 4
+max_line_length = 100
+indent_unit = space
+comma_style = trailing
+
+[sqlfluff:indentation]
+# dbt Style Guide
+indented_using_on = True
+
+[sqlfluff:rules:L010]
+# SQL Style Guide
+capitalisation_policy = upper
+
+[sqlfluff:rules:L014]
+# dbt Style Guide
+capitalisation_policy = lower
+unquoted_identifiers_policy = column_aliases
+
+[sqlfluff:rules:L016]
+ignore_comment_lines = True
+
+[sqlfluff:rules:L022]
+# dbt Style Guide
+comma_style = trailing
+
+[sqlfluff:rules:L030]
+# SQL Style Guide
+capitalisation_policy = upper
+
+[sqlfluff:rules:L040]
+# SQL Style Guide
+capitalisation_policy = upper
+
+[sqlfluff:rules:L054]
+# dbt Style Guide
+group_by_and_order_by_style = implicit
+
+[sqlfluff:rules:L057]
+# SQL Style Guide
+allow_space_in_identifier = True
+additional_allowed_characters = ['.','(',')','-']
+
+[sqlfluff:rules:L036]
+# SQL Style Guide
+capitalisation_policy = upper
