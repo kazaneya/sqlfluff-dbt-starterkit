@@ -2,9 +2,14 @@
 
 今回 CI 環境に SQL の書き方を統一する Linter を導入し、dbt を利用した開発でもバグが起きにくい仕組みを構築しました。
 
-想定 DWH は BigQuery としています。今後、他の DWH にも対応させていく予定ですが、コントリビュートも歓迎です。
-
 以下で CI 環境を構築する手順を紹介します。
+
+# 対応環境
+- dbt Core / dbt Cloud
+- GitHub Actions
+- BigQuery
+
+今後、他の DWH にも対応させていく予定ですが、コントリビュートも歓迎です。
 
 # システム構成図
 システムの構築図は以下のようになります。
@@ -23,6 +28,7 @@ SQL のコンパイルにはテーブルへのアクセスは行いませんが�
 2. GitHub と Google Cloud の連携設定
 3. Reviewdog の設定
 4. リントの設定
+
 ## ダミー環境の作成
 CIの認証を通すためのダミー環境を作成します。
 この環境は認証以外では使いません。
@@ -38,6 +44,7 @@ Bigquery の Cloud Console（以下の画像）を利用できない場合は [�
 
 ## GitHub と Google Cloud の連携設定
 [google-GitHub-actions/auth](https://github.com/google-github-actions/auth) を利用して行います。
+
 ### Google Cloud 側の設定
 発行したサービスアカウントキーを Google Cloud 外部で利用することは、鍵の漏洩リスクがあります。今回は、そのリスクを回避しつつGCPの認証を行うことができる Workload Identity 連携を利用します。
 
@@ -62,10 +69,12 @@ GitHub Docs の [Authentication > Account security > Create a PAT](https://docs.
 
 ## リントの設定
 dbt プロジェクトを作成する dbt init コマンドを実行し、そこにリント設定を行ったものがこのレポジトリです。後ほど紹介するファイルを dbt プロジェクト内に配置することで動作させることができます。
+
 ### dbt init をする代わりにレポジトリをコピーして利用する方法
 ```
 $ git clone  git@github.com:kazaneya/sqlfluff-dbt-github-actions.git new_repo
 ```
+
 ### dbt プロジェクト内にリント設定をコピーする方法
 以下を dbt プロジェクトにコピーしてください。
 
