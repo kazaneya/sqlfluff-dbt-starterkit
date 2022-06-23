@@ -7,9 +7,10 @@
 # 対応環境
 - dbt Core / dbt Cloud
 - GitHub Actions
-- BigQuery
+- sqlfluff が対応している [DWH](https://docs.sqlfluff.com/en/stable/dialects.html)
 
-今後、他の DWH にも対応させていく予定ですが、コントリビュートも歓迎です。
+ダミー環境は GCP のみ対応しています。
+今後ダミー環境を GCP 以外で構築できるようにしていく予定ですが、コントリビュートも歓迎です。
 
 # システム構成図
 システムの構築図は以下のようになります。
@@ -69,6 +70,13 @@ GitHub Docs の [Authentication > Account security > Create a PAT](https://docs.
 
 ## リントの設定
 dbt プロジェクトを作成する dbt init コマンドを実行し、そこにリント設定を行ったものがこのレポジトリです。後ほど紹介するファイルを dbt プロジェクト内に配置することで動作させることができます。
+
+### dialect の設定
+本番環境で利用している DWH に合わせて設定をします。
+sqlfluff 公式ドキュメントの [Dialects Reference](https://docs.sqlfluff.com/en/stable/dialects.html?highlight=dialect) で対応環境の確認ができます。
+
+Actions secrets で本番環境を DIALECT として登録をしてください。
+BigQuery の場合は bigquery のように小文字で登録します。
 
 ### dbt init をする代わりにレポジトリをコピーして利用する方法
 ```

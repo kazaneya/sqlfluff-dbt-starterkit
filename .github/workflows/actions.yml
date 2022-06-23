@@ -34,7 +34,7 @@ jobs:
         run: |
           git fetch --depth 1 origin ${TARGET_BRANCH}
           for file in $(git diff origin/${TARGET_BRANCH} HEAD --diff-filter=AM --name-only -- "*.sql") ; do
-            sqlfluff lint --dialect bigquery --format json ${file} |
+            sqlfluff lint --dialect ${{ secrets.DIALECT }} --format json ${file} |
             jq -R 'fromjson?' | jq -r -f "${{ github.workspace }}/.github/to-rdjson.jq" |
             reviewdog -f=rdjson -reporter=github-pr-review -filter-mode=nofilter -level=error -fail-on-error
           done
