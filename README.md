@@ -80,7 +80,7 @@ BigQuery の場合は bigquery のように小文字で登録します。
 
 ### dbt init をする代わりにレポジトリをコピーして利用する方法
 ```
-$ git clone  git@github.com:kazaneya/sqlfluff-dbt-github-actions.git new_repo
+$ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 ```
 
 ### dbt プロジェクト内にリント設定をコピーする方法
