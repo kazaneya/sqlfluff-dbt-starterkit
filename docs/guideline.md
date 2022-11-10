@@ -16,9 +16,16 @@
 独自ルールは L016 の「コメントアウトは Lint の対象から除く」のみです。
 ルールの見直しについてはご相談ください。
 
+上記ルール以外は sqlfluff のデフォルトで指定してあるルールで動作する仕様です。
+上記ルールのみの実行を行いたい場合は [.sqlfluff](../.sqlfluff) の以下のコメントアウトを外してください。
+```
+[sqlfluff]
+# rules = core
+```
+
 # 設定した条件での個別ルール
 各ルールの詳細を以下で説明します。
-ここで案内するルールは sqlfluffの [Rules Reference](https://docs.sqlfluff.com/en/stable/rules.html) を元に作成しました。
+ここで案内するルールは sqlfluff の [Rules Reference](https://docs.sqlfluff.com/en/stable/rules.html) を元に作成しました。
 
 sqlfluff のアップデートでルールの変更や増減が行われた場合は、このドキュメントを更新していく予定ですが、コントリビュートも歓迎です。
 

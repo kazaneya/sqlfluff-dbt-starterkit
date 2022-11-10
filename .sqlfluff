@@ -6,6 +6,7 @@
 
 [sqlfluff]
 templater = dbt
+# rules = core
 
 [sqlfluff:templater:dbt]
 project_dir = .
@@ -26,37 +27,46 @@ indented_using_on = True
 
 [sqlfluff:rules:L010]
 # SQL Style Guide
+group = core
 capitalisation_policy = upper
 
 [sqlfluff:rules:L014]
 # dbt Style Guide
+group = core
 capitalisation_policy = lower
 unquoted_identifiers_policy = column_aliases
 
 [sqlfluff:rules:L016]
+group = core
 ignore_comment_lines = True
 
 [sqlfluff:rules:L022]
 # dbt Style Guide
+group = core
 comma_style = trailing
 
 [sqlfluff:rules:L030]
 # SQL Style Guide
+group = core
+capitalisation_policy = upper
+
+[sqlfluff:rules:L036]
+# SQL Style Guide
+group = core
 capitalisation_policy = upper
 
 [sqlfluff:rules:L040]
 # SQL Style Guide
+group = core
 capitalisation_policy = upper
 
 [sqlfluff:rules:L054]
 # dbt Style Guide
+group = core
 group_by_and_order_by_style = implicit
 
 [sqlfluff:rules:L057]
 # SQL Style Guide
+group = core
 allow_space_in_identifier = True
 additional_allowed_characters = ['.','(',')','-']
-
-[sqlfluff:rules:L036]
-# SQL Style Guide
-capitalisation_policy = upper
