@@ -1,6 +1,6 @@
 name: sqlfluff with reviewdog
 
-on: [pull_request]
+on: [push]
 
 env: 
   TARGET_BRANCH: ${{ github.base_ref }}
