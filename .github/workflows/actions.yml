@@ -1,9 +1,6 @@
 name: sqlfluff with reviewdog
 
-on:
-  push:
-    branches:
-      - main
+on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
 
 env: 
   TARGET_BRANCH: ${{ github.base_ref }}
