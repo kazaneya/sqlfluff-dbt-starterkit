@@ -1,9 +1,3 @@
-現在 dbt を利用して SQL でデータパイプラインの開発を行うことが活発になってきています。データパイプラインでは信頼性の高いデータを提供することが求められるため、他のアプリケーション開発同様、バグが起きにくいような仕組みを導入した方が良いと考えられます。
-
-今回 CI 環境に SQL の書き方を統一する Linter を導入し、dbt を利用した開発でもバグが起きにくい仕組みを構築しました。
-
-以下で CI 環境を構築する手順を紹介します。
-
 # 対応環境
 - dbt Core / dbt Cloud
 - GitHub Actions
@@ -39,9 +33,7 @@ CIの認証を通すためのダミー環境を作成します。
 
 Google Cloud 公式ドキュメントの [ホーム > Apigee  > ドキュメント  > ガイド](https://cloud.google.com/apigee/docs/hybrid/v1.2/precog-gcpproject?hl=ja) の手順でプロジェクトの作成を行います。
 
-Bigquery の Cloud Console（以下の画像）を利用できない場合は [ホーム > BigQuery > ドキュメント > ガイド](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=ja) の手順でBigQuery API を有効にしてください。
-
-![bigquery_cloud_console](https://user-images.githubusercontent.com/88569749/173986840-1fd4671a-19fd-4646-9380-9d3d1712d9f1.png)
+Bigquery の Cloud Console を利用できない場合は [ホーム > BigQuery > ドキュメント > ガイド](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=ja) の手順でBigQuery API を有効にしてください。
 
 ## GitHub と Google Cloud の連携設定
 [google-GitHub-actions/auth](https://github.com/google-github-actions/auth) を利用して行います。
@@ -91,6 +83,19 @@ $ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 .github/
 .sqlfluff
 .sqlfluffignore
+```
+
+### Pull Request 作成時に動作させるように設定を変更する
+[.github/workflows/actions.yml](.github/workflows/actions.yml)の3行目をコメントアウトの指示に従って変更します。
+
+変更前
+```
+on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
+```
+
+変更後
+```
+on: [pull_request]
 ```
 
 ### リントの動かし方
