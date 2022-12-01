@@ -13,12 +13,19 @@
 # ルールの採用基準
 [dbt-labs/corp](https://github.com/dbt-labs/corp) の [dbt Style Guide](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md) のルールを軸に、文字数の制限や大文字・小文字などは GitLab の [Business Technology > Data Team > Data Team Platform > SQL Style Guide](https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/) のルールを採用しています。
 
-独自ルールは L016 の「コメントアウトは Lint の対象から除く」のみです。
+独自に設定しているルールは L016 の「コメントアウトは Lint の対象から除く」のみです。
 ルールの見直しについてはご相談ください。
 
-# 設定した条件での個別ルール
+上記ルール以外は sqlfluff のデフォルトで指定してあるルールで動作する仕様です。
+上記ルールのみの実行を行いたい場合は [.sqlfluff](../.sqlfluff) の以下のコメントアウトを外してください。
+```
+[sqlfluff]
+# rules = core
+```
+
+# 各ルールの詳細
 各ルールの詳細を以下で説明します。
-ここで案内するルールは sqlfluffの [Rules Reference](https://docs.sqlfluff.com/en/stable/rules.html) を元に作成しました。
+ここで案内するルールは sqlfluff の [Rules Reference](https://docs.sqlfluff.com/en/stable/rules.html) を元に作成しました。
 
 sqlfluff のアップデートでルールの変更や増減が行われた場合は、このドキュメントを更新していく予定ですが、コントリビュートも歓迎です。
 
