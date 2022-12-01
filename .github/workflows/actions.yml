@@ -2,7 +2,8 @@ name: sqlfluff with reviewdog
 
 on:
   push:
-    - main
+    branches:
+      - main
 
 env: 
   TARGET_BRANCH: ${{ github.base_ref }}
