@@ -33,13 +33,13 @@ CIの認証を通すためのダミー環境を作成します。
 
 Google Cloud 公式ドキュメントの [ホーム > Apigee  > ドキュメント  > ガイド](https://cloud.google.com/apigee/docs/hybrid/v1.2/precog-gcpproject?hl=ja) の手順でプロジェクトの作成を行います。
 
-Bigquery の Cloud Console を利用できない場合は [ホーム > BigQuery > ドキュメント > ガイド](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=ja) の手順でBigQuery API を有効にしてください。
+Bigquery の Cloud Console を利用できない場合は [ホーム > BigQuery > ドキュメント > ガイド](https://cloud.google.com/bigquery/docs/bigquery-web-ui?hl=ja) の手順で BigQuery API を有効にしてください。
 
 ## GitHub と Google Cloud の連携設定
 [google-GitHub-actions/auth](https://github.com/google-github-actions/auth) を利用して行います。
 
 ### Google Cloud 側の設定
-発行したサービスアカウントキーを Google Cloud 外部で利用することは、鍵の漏洩リスクがあります。今回は、そのリスクを回避しつつGCPの認証を行うことができる Workload Identity 連携を利用します。
+発行したサービスアカウントキーを Google Cloud 外部で利用することは、鍵の漏洩リスクがあります。今回は、そのリスクを回避しつつ GCP の認証を行うことができる Workload Identity 連携を利用します。
 
 [google-github-actions/auth](https://github.com/google-github-actions/auth) の README にある [Setting up Workload Identity Federation](https://github.com/google-github-actions/auth#setting-up-workload-identity-federation) の手順で設定を行います。
 
@@ -71,7 +71,7 @@ Actions secrets で本番環境を DIALECT として登録をしてください�
 BigQuery の場合は bigquery のように小文字で登録します。
 
 ### dbt init をする代わりにレポジトリをコピーして利用する方法
-```
+```sh
 $ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 ```
 
@@ -86,15 +86,15 @@ $ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 ```
 
 ### Pull Request 作成時に動作させるように設定を変更する
-[.github/workflows/actions.yml](.github/workflows/actions.yml)の3行目をコメントアウトの指示に従って変更します。
+[.github/workflows/actions.yml](.github/workflows/actions.yml#L3) の3行目をコメントアウトの指示に従って変更します。
 
 変更前
-```
+```yml
 on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
 ```
 
 変更後
-```
+```yml
 on: [pull_request]
 ```
 
