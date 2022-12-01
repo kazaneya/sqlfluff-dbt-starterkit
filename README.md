@@ -1,3 +1,6 @@
+これは dbt での開発時（Pull Request 作成時）に SQL の Lint を行う GitHub Actions を構築するためのサンプルです。
+SQL の Lint には [sqlfluff](https://docs.sqlfluff.com/en/stable/) を採用しています。
+
 # 対応環境
 - dbt Core / dbt Cloud
 - GitHub Actions
