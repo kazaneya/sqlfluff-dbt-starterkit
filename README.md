@@ -20,7 +20,7 @@ sqlfluff で dbt のテンプレートを使用するため、dbt を CI 環境�
 SQL のコンパイルにはテーブルへのアクセスは行いませんが、CI 環境から本番環境の GCP プロジェクトに接続できない様にしました。
 そのため、プロジェクト単位でダミー環境を作成してください。
 
-![diagram](https://user-images.githubusercontent.com/88569749/206361210-16829509-2be3-4f92-b490-c7650fccbeee.png)
+![diagram](docs/images/system_diagram.png)
 
 # CI 環境構築の大まかな流れ
 以下の手順で CI 環境を構築します。
