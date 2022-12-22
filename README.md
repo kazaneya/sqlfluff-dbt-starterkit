@@ -8,8 +8,12 @@ SQL の Lint には [sqlfluff](https://docs.sqlfluff.com/en/stable/) を採用�
 - GitHub Actions
 - sqlfluff が対応している [DWH](https://docs.sqlfluff.com/en/stable/dialects.html)
 
-ダミー環境は GCP のみ対応しています。
-今後ダミー環境を GCP 以外で構築できるようにしていく予定ですが、コントリビュートも歓迎です。
+## 対応ダミー環境
+本システムはダミー環境を用意する必要があります。今後対応ダミー環境を増やしていく予定ですが、コントリビュートも歓迎です。
+- [x] BigQuery
+- [ ] Snowflake
+- [ ] Amazon Redshift
+- [ ] Azure Synapse Analytics
 
 # システム構成図
 システムの構築図は以下のようになります。
