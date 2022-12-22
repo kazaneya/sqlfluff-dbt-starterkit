@@ -26,6 +26,13 @@ SQL のコンパイルにはテーブルへのアクセスは行いませんが�
 
 ![diagram](docs/images/system_diagram.png)
 
+## 利用している OSS
+| OSS 名 | ライセンス |
+| :-: | :-: |
+| [dbt-bigquery](https://github.com/dbt-labs/dbt-bigquery) | Apache-2.0 |
+| [sqlfluff](https://github.com/sqlfluff/sqlfluff) | MIT |
+| [reviewdog](https://github.com/reviewdog/reviewdog) | MIT |
+
 # CI 環境構築の大まかな流れ
 以下の手順で CI 環境を構築します。
 1. [ダミー環境の作成](#ダミー環境の作成)
