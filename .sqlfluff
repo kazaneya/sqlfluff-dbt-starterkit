@@ -50,11 +50,6 @@ comma_style = trailing
 group = core
 capitalisation_policy = upper
 
-[sqlfluff:rules:L036]
-# GitLab SQL Style Guide
-group = core
-capitalisation_policy = upper
-
 [sqlfluff:rules:L040]
 # GitLab SQL Style Guide
 group = core
