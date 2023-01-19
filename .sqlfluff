@@ -50,11 +50,6 @@ comma_style = trailing
 group = core
 capitalisation_policy = upper
 
-[sqlfluff:rules:L036]
-# SQL Style Guide
-group = core
-capitalisation_policy = upper
-
 [sqlfluff:rules:L040]
 # SQL Style Guide
 group = core
