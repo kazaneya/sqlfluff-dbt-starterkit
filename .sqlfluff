@@ -1,7 +1,7 @@
 # dbt Style Guide
 # https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
 
-# SQL Style Guide
+# GitLab SQL Style Guide
 # https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/
 
 [sqlfluff]
@@ -26,7 +26,7 @@ comma_style = trailing
 indented_using_on = True
 
 [sqlfluff:rules:L010]
-# SQL Style Guide
+# GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
@@ -46,12 +46,12 @@ group = core
 comma_style = trailing
 
 [sqlfluff:rules:L030]
-# SQL Style Guide
+# GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
 [sqlfluff:rules:L040]
-# SQL Style Guide
+# GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
@@ -61,7 +61,7 @@ group = core
 group_by_and_order_by_style = implicit
 
 [sqlfluff:rules:L057]
-# SQL Style Guide
+# GitLab SQL Style Guide
 group = core
 allow_space_in_identifier = True
 additional_allowed_characters = ['.','(',')','-']
