@@ -123,3 +123,12 @@ Reviewdog から Linter のエラー内容のコメントがあるとこの様�
 ルールの詳細は[ガイドライン](docs/guideline.md)を参照してください。
 
 ![test_pull_request](https://user-images.githubusercontent.com/88569749/173986958-ae1df399-adfc-477c-9721-c436ec50e66d.png)
+
+## GitHub Actions で利用しているパッケージのアップデートについて
+GitHub Actions で利用しているパッケージのバージョンは [.github/requirements.txt](.github/requirements.txt) で指定しています。パッケージを最新バージョンに保つために [Dependabot](https://docs.github.com/ja/code-security/dependabot) を導入し、パッケージのアップデートがある場合に自動的に Pull Request が作成される仕様にしました。
+
+作成された Pull Request の CI の動作結果に応じて以下のような対応をしてください。
+- CI が正常に動作した場合（または、エラーの解消ができた場合）
+  - デフォルトブランチにマージする
+- CI がエラーになった場合
+  - マージはせずに原因を調査する（パッケージのバージョンによる依存関係でエラーになっている可能性が高いです）
