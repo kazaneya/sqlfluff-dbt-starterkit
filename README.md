@@ -107,12 +107,12 @@ $ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 
 変更前
 ```yml
-on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
+on: [workflow_dispatch] # workflow_dispatch から pull_request_target に変更する
 ```
 
 変更後
 ```yml
-on: [pull_request]
+on: [pull_request_target]
 ```
 
 #### リントの動かし方
