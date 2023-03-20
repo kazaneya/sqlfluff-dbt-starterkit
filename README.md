@@ -107,12 +107,12 @@ $ git clone  git@github.com:kazaneya/sqlfluff-dbt-starterkit.git new_repo
 
 変更前
 ```yml
-on: [workflow_dispatch] # workflow_dispatch から pull_request_target に変更する
+on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
 ```
 
 変更後
 ```yml
-on: [pull_request_target]
+on: [pull_request]
 ```
 
 #### リントの動かし方
@@ -126,6 +126,7 @@ Reviewdog から Linter のエラー内容のコメントがあるとこの様�
 
 ## GitHub Actions で利用しているパッケージのアップデートについて
 GitHub Actions で利用しているパッケージのバージョンは [.github/requirements.txt](.github/requirements.txt) で指定しています。パッケージを最新バージョンに保つために [Dependabot](https://docs.github.com/ja/code-security/dependabot) を導入し、パッケージのアップデートがある場合に自動的に Pull Request が作成される仕様にしました。
+Dependabot で作成された Pull Request で CI を動作させるために Actions secrets と同様の値を Dependabot secrets にも設定してください。
 
 作成された Pull Request の CI の動作結果に応じて以下のような対応をしてください。
 - CI が正常に動作した場合（または、エラーの解消ができた場合）
