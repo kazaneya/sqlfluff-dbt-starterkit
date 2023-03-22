@@ -6,7 +6,9 @@
 
 [sqlfluff]
 templater = dbt
-# rules = core
+exclude_rules = L029, L034, L057
+max_line_length = 100
+# rule = core
 
 [sqlfluff:templater:dbt]
 project_dir = .
@@ -14,16 +16,14 @@ profiles_dir = .dbt
 profile = github-actions
 target = sqlfluff
 
-[sqlfluff:rules]
-# dbt Style Guide
-tab_space_size = 4
-max_line_length = 100
-indent_unit = space
-comma_style = trailing
-
 [sqlfluff:indentation]
 # dbt Style Guide
+tab_space_size = 4
+indent_unit = space
 indented_using_on = True
+
+[sqlfluff:layout:type:comma]
+line_position = trailing
 
 [sqlfluff:rules:L010]
 # GitLab SQL Style Guide
