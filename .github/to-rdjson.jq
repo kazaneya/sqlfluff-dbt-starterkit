@@ -7,7 +7,7 @@
     message: $violation.description,
     code: {
       value: $violation.code,
-      url: "https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.core.rules.sphinx.\($violation.code)"
+      url: "https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.core.rules.sphinx.Rule_\($violation.code)"
     },
     location: {
       path: $file.filepath,
