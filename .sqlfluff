@@ -6,7 +6,6 @@
 
 [sqlfluff]
 templater = dbt
-exclude_rules = L029, L034, L057
 max_line_length = 100
 # rule = core
 
@@ -25,43 +24,44 @@ indented_using_on = True
 [sqlfluff:layout:type:comma]
 line_position = trailing
 
-[sqlfluff:rules:L010]
+[sqlfluff:rules:capitalisation.keywords]
 # GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
-[sqlfluff:rules:L014]
+[sqlfluff:rules:capitalisation.identifiers]
 # dbt Style Guide
 group = core
 capitalisation_policy = lower
 unquoted_identifiers_policy = column_aliases
 
-[sqlfluff:rules:L016]
+[sqlfluff:rules:layout.long_lines]
 group = core
 ignore_comment_lines = True
 
-[sqlfluff:rules:L022]
+[sqlfluff:rules:layout.cte_newline]
 # dbt Style Guide
 group = core
 comma_style = trailing
 
-[sqlfluff:rules:L030]
+[sqlfluff:rules:capitalisation.functions]
 # GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
-[sqlfluff:rules:L040]
+[sqlfluff:rules:capitalisation.literals]
 # GitLab SQL Style Guide
 group = core
 capitalisation_policy = upper
 
-[sqlfluff:rules:L054]
+[sqlfluff:rules:ambiguous.column_references]
 # dbt Style Guide
 group = core
 group_by_and_order_by_style = implicit
 
-[sqlfluff:rules:L057]
+[sqlfluff:rules:references.special_chars]
 # GitLab SQL Style Guide
 group = core
 allow_space_in_identifier = True
 additional_allowed_characters = ['.','(',')','-']
+
