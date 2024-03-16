@@ -1,38 +1,66 @@
-name: sqlfluff with reviewdog
+name: sqlfluff
 
 on: [workflow_dispatch] # workflow_dispatch から pull_request に変更する
 
 env: 
-  TARGET_BRANCH: ${{ github.base_ref }}
+  BASE_BRANCH: ${{ github.base_ref }}
+  HEAD_BRANCH: ${{ github.head_ref }}
 
 jobs:
-  linter:
+  sqlfluff:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: google-github-actions/auth@v0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
-      - uses: reviewdog/action-setup@v1
+      - uses: actions/setup-python@v5
         with:
-          reviewdog_version: latest
-      - uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
+          python-version: "3.10"
       - name: Install Packages
-        run: pip install -r "${{ github.workspace }}/.github/requirements.txt"
-      - name: 'Run sqlfluff lint and reviewdog'
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+        run: pip install -r "${{ github.workspace }}/requirements.txt"
+      - name: Get changed files
         run: |
-          dbt deps
-          git fetch --depth 1 origin ${TARGET_BRANCH}
-          for file in $(git diff origin/${TARGET_BRANCH} HEAD --diff-filter=AM --name-only -- "*.sql") ; do
-            sqlfluff lint --dialect ${{ secrets.DIALECT }} --format json ${file} |
-            jq -R 'fromjson?' | jq -r -f "${{ github.workspace }}/.github/to-rdjson.jq" |
-            reviewdog -f=rdjson -reporter=github-pr-review -filter-mode=nofilter -level=error -fail-on-error
-          done
+          git fetch --depth 1 origin ${BASE_BRANCH}
+          changed_files=$(git diff origin/${BASE_BRANCH} HEAD --diff-filter=AM --name-only -- "*.sql")
+          if [ -n "$changed_files" ]; then
+            changed_files="${changed_files//$'\n'/ }"
+            echo "files=$changed_files" >> $GITHUB_ENV
+          else
+            echo "files=SKIP" >> $GITHUB_ENV
+          fi
+      - name: Fix with SQLFluff
+        continue-on-error: true
+        run: |
+          if [ "$files" != "SKIP" ]; then
+            dbt deps
+            sqlfluff fix --dialect ${{ secrets.DIALECT }} $files -f
+          fi
+      - name: Check diff
+        id: check_diff
+        run: |
+          git diff --name-only --exit-code
+        continue-on-error: true
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions"
+          git add **/*.sql
+          git commit -m "Auto fix with SQLFluff"
+          git push origin HEAD:${HEAD_BRANCH}
+        if:
+          steps.check_diff.outcome == 'failure'
+      - name: Lint with SQLFluff
+        run: |
+          if [ "$files" != "SKIP" ]; then
+            dbt deps
+            sqlfluff lint --dialect ${{ secrets.DIALECT }} --format github-annotation-native --annotation-level error $files
+          else
+            echo "No SQL files changed."
+          fi
