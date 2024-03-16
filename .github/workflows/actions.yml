@@ -40,7 +40,7 @@ jobs:
         run: |
           if [ "$files" != "SKIP" ]; then
             dbt deps
-            sqlfluff fix $files -f
+            sqlfluff fix --dialect ${{ secrets.DIALECT }} $files -f
           fi
       - name: Check diff
         id: check_diff
