@@ -45,7 +45,6 @@ jobs:
       - name: Check diff
         id: check_diff
         run: |
-          git add **/*.sql
           git diff --name-only --exit-code
         continue-on-error: true
       - name: Commit & Push
