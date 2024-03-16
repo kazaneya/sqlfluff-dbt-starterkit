@@ -61,7 +61,7 @@ jobs:
         run: |
           if [ "$files" != "SKIP" ]; then
             dbt deps
-            sqlfluff lint --format github-annotation-native --annotation-level error $files
+            sqlfluff lint --dialect ${{ secrets.DIALECT }} --format github-annotation-native --annotation-level error $files
           else
             echo "No SQL files changed."
           fi
