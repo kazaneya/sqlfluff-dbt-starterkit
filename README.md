@@ -32,13 +32,11 @@ SQL のコンパイルにはテーブルへのアクセスは行いませんが�
 | :-: | :-: |
 | [dbt-bigquery](https://github.com/dbt-labs/dbt-bigquery) | Apache-2.0 |
 | [sqlfluff](https://github.com/sqlfluff/sqlfluff) | MIT |
-| [reviewdog](https://github.com/reviewdog/reviewdog) | MIT |
 
 ## CI 環境構築の大まかな流れ
 以下の手順で CI 環境を構築します。
 1. [ダミー環境の作成](#ダミー環境の作成)
 2. [GitHub と Google Cloud の連携設定](#github-と-google-cloud-の連携設定)
-3. [Reviewdog の設定](#reviewdog-の設定)
 4. [リントの設定](#リントの設定)
 
 ### ダミー環境の作成
@@ -68,14 +66,6 @@ GitHub Docs の [GitHub Actions > Security guides > Encrypted secrets](https://d
 WORKLOAD_IDENTITY_PROVIDER には `projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider` のような値を設定します。
 
 SERVICE_ACCOUNT には `my-service-account@my-project.iam.gserviceaccount.com` のような値を設定します。
-
-### Reviewdog の設定
-[Reviewdog](https://github.com/reviewdog/reviewdog) は Linter の結果に修正箇所があった場合、Pull Request の該当する箇所に違反や修正内容をコメントしてくれます。
-Reviewdog にコメントさせるため、GitHub の Personal access token を利用します。
-
-GitHub Docs の [Authentication > Account security > Create a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) の手順で Personal access token を作成してください。
-
-その後、Personal access token を Actions secrets で REVIEWDOG_GITHUB_API_TOKEN として登録をしてください。
 
 ### リントの設定
 dbt プロジェクトを作成する dbt init コマンドを実行し、そこにリント設定を行ったものがこのレポジトリです。後ほど紹介するファイルを dbt プロジェクト内に配置することで動作させることができます。
@@ -117,15 +107,12 @@ on: [pull_request]
 
 #### リントの動かし方
 .sql ファイルの変更がある Pull Request を作成すると自動的に動作します。
-Reviewdog から Linter のエラー内容のコメントがあるとこの様になります。
+Linter のエラー内容は Pull requests 内の Files changed で確認することができます。
 
-下図では「L050」「L010」のルールについて指摘しています。
 ルールの詳細は[ガイドライン](docs/guideline.md)を参照してください。
 
-![test_pull_request](https://user-images.githubusercontent.com/88569749/173986958-ae1df399-adfc-477c-9721-c436ec50e66d.png)
-
 ## GitHub Actions で利用しているパッケージのアップデートについて
-GitHub Actions で利用しているパッケージのバージョンは [.github/requirements.txt](.github/requirements.txt) で指定しています。パッケージを最新バージョンに保つために [Dependabot](https://docs.github.com/ja/code-security/dependabot) を導入し、パッケージのアップデートがある場合に自動的に Pull Request が作成される仕様にしました。
+GitHub Actions で利用しているパッケージのバージョンは [requirements.txt](requirements.txt) で指定しています。パッケージを最新バージョンに保つために [Dependabot](https://docs.github.com/ja/code-security/dependabot) を導入し、パッケージのアップデートがある場合に自動的に Pull Request が作成される仕様にしました。
 Dependabot で作成された Pull Request で CI を動作させるために Actions secrets と同様の値を Dependabot secrets にも設定してください。
 
 作成された Pull Request の CI の動作結果に応じて以下のような対応をしてください。
