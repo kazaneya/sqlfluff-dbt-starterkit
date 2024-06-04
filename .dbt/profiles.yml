@@ -1,7 +1,14 @@
-github-actions:
+bq-dummy:
   target: sqlfluff
   outputs:
     sqlfluff:
       type: bigquery
       schema: dummy
       method: oauth
+
+redshift-dummy:
+  target: sqlfluff
+  outputs:
+    sqlfluff:
+      type: duckdb
+      path: .dbt/dummy.duckdb
