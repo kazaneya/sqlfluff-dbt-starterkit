@@ -12,8 +12,12 @@ max_line_length = 100
 [sqlfluff:templater:dbt]
 project_dir = .
 profiles_dir = .dbt
-profile = github-actions
 target = sqlfluff
+# 使用するDWH製品以外のprofileはコメントアウトしてください
+# BigQuery
+profile = bq-dummy
+# Redshift
+profile = redshift-dummy
 
 [sqlfluff:indentation]
 # dbt Style Guide
