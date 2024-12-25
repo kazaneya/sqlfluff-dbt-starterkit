@@ -16,8 +16,8 @@ target = sqlfluff
 # 使用するDWH製品以外のprofileはコメントアウトしてください
 # BigQuery
 profile = bq-dummy
-# Redshift
-profile = redshift-dummy
+# Duckdb
+profile = duckdb-dummy
 
 [sqlfluff:indentation]
 # dbt Style Guide
