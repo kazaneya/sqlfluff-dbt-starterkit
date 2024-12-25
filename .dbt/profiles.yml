@@ -6,7 +6,7 @@ bq-dummy:
       schema: dummy
       method: oauth
 
-redshift-dummy:
+duckdb-dummy:
   target: sqlfluff
   outputs:
     sqlfluff:
