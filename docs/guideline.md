@@ -11,7 +11,7 @@
 必要に応じて追記していきます。
 
 # ルールの採用基準
-[dbt-labs/corp](https://github.com/dbt-labs/corp) の [dbt Style Guide](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md) のルールを軸に、文字数の制限や大文字・小文字などは GitLab の [Business Technology > Data Team > Data Team Platform > SQL Style Guide](https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/) のルールを採用しています。
+[dbt Labs/Best practice guides](https://docs.getdbt.com/best-practices) の [How we style our SQL](https://docs.getdbt.com/best-practices/how-we-style/2-how-we-style-our-sql) のルールを軸に、文字数の制限や大文字・小文字などは GitLab の [GitLab Handbook > Enterprise Data Team > Data Team Platform > SQL Style Guide](https://handbook.gitlab.com/handbook/enterprise-data/platform/sql-style-guide/) のルールを採用しています。
 
 独自に設定しているルールは Rule_LT05 の「コメントアウトは Lint の対象から除く」のみです。
 ルールの見直しについてはご相談ください。
