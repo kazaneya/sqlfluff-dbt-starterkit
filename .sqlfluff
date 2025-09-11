@@ -1,8 +1,8 @@
 # dbt Style Guide
-# https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
+# https://docs.getdbt.com/best-practices/how-we-style/2-how-we-style-our-sql
 
 # GitLab SQL Style Guide
-# https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/
+# https://handbook.gitlab.com/handbook/enterprise-data/platform/sql-style-guide/
 
 [sqlfluff]
 templater = dbt
